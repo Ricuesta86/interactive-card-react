@@ -1,0 +1,14 @@
+@use './sass/variables';
+
+.main{
+    display: flex;    
+    &__header{
+        background-color: yellow;
+    }
+    &__form{
+        background-color: green;
+        &__group{
+            display: flex;
+        }
+    }
+}
