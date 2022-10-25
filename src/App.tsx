@@ -3,20 +3,52 @@ import "./App.scss";
 import bgCardFront from "./assets/images/bg-card-front.png";
 import bgCardBack from "./assets/images/bg-card-back.png";
 
+type cardType = {
+  number: number;
+  name: string;
+  yy: number;
+  mm: number;
+  cvc: number;
+};
+
 function App() {
-  
+  const [card, setCard] = useState<cardType>({
+    number: 0,
+    name: "",
+    yy: 0,
+    mm: 0,
+    cvc: 0,
+  });
+
+
+  const handleChange = (event:any,name:string)=>{
+    event.preventDefault();
+    console.log(event.target.name.value);
+  }
+
+
+
+
   return (
     <div className="main">
       <header className="main__header">
         <div className="main__header__cardfront">
           <img src={bgCardFront} alt="Card Front" />
-          <p className="main__header__cardfront__number">0000 0000 0000 0000</p>
-          <p className="main__header__cardfront__name">Jane Appleseed</p>
-          <p className="main__header__cardfront__yy-mm">00/00</p>
+          <p className="main__header__cardfront__number">
+            {card.number === 0 ? "0000 0000 0000 0000" : card.number}
+          </p>
+          <p className="main__header__cardfront__name">
+            {card.name === "" ? "Jane Appleseed" : card.name}
+          </p>
+          <p className="main__header__cardfront__yy-mm">
+            {card.yy === 0 ? "00" : card.yy}/{card.mm === 0 ? "00" : card.mm}
+          </p>
         </div>
         <div className="main__header__cardback">
           <img src={bgCardBack} alt="Card back" />
-          <p className="main__header__cardback__cvc">000</p>
+          <p className="main__header__cardback__cvc">
+            {card.cvc === 0 ? "000" : card.cvc}
+          </p>
         </div>
       </header>
       <form className="main__form">
@@ -43,7 +75,7 @@ function App() {
           <div className="main__form__group">
             <label htmlFor="card-number">
               Exp. Date (mm/yy)
-              <input type="text" id="card-mm" name="card-mm" placeholder="MM" />
+              <input type="text" id="card-mm" name="card-mm" placeholder="MM"  onChange={(e)=>handleChange(e,'card-mm')}/>
               <input type="text" id="card-yy" name="card-yy" placeholder="YY" />
             </label>
           </div>
