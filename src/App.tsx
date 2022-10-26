@@ -20,6 +20,12 @@ function App() {
     cvc: 0,
   });
 
+  const [numberCard, setNumberCard] = useState<number>(0)
+  const [nameCard, setNameCard] = useState<String>('')
+  const [yyCard, setYyCard] = useState<number>(0)
+  const [mmCard, setMmCard] = useState<number>(0)
+  const [cvcCard, setCvcCard] = useState<number>(0)
+
 
   const handleChange = (event:any,name:string)=>{
     event.preventDefault();
@@ -35,19 +41,19 @@ function App() {
         <div className="main__header__cardfront">
           <img src={bgCardFront} alt="Card Front" />
           <p className="main__header__cardfront__number">
-            {card.number === 0 ? "0000 0000 0000 0000" : card.number}
+            {numberCard === 0 ? "0000 0000 0000 0000" : numberCard}
           </p>
           <p className="main__header__cardfront__name">
-            {card.name === "" ? "Jane Appleseed" : card.name}
+            {nameCard === "" ? "Jane Appleseed" : nameCard}
           </p>
           <p className="main__header__cardfront__yy-mm">
-            {card.yy === 0 ? "00" : card.yy}/{card.mm === 0 ? "00" : card.mm}
+            {yyCard === 0 ? "00" : yyCard}/{mmCard === 0 ? "00" : mmCard}
           </p>
         </div>
         <div className="main__header__cardback">
           <img src={bgCardBack} alt="Card back" />
           <p className="main__header__cardback__cvc">
-            {card.cvc === 0 ? "000" : card.cvc}
+            {cvcCard === 0 ? "000" : cvcCard}
           </p>
         </div>
       </header>
@@ -60,6 +66,7 @@ function App() {
             id="card-name"
             name="card-name"
             placeholder="e.g. Jane Applessed"
+            onChange={e=>setNameCard(e.target.value)}
           />
         </label>
         <label htmlFor="card-number">
@@ -69,14 +76,15 @@ function App() {
             id="card-number"
             name="card-number"
             placeholder="e.g. 1234 5678 9123 0000"
+            onChange={e=>setNumberCard(Number(e.target.value))}
           />
         </label>
         <div className="main__form__group">
           <div className="main__form__group">
             <label htmlFor="card-number">
               Exp. Date (mm/yy)
-              <input type="text" id="card-mm" name="card-mm" placeholder="MM"  onChange={(e)=>handleChange(e,'card-mm')}/>
-              <input type="text" id="card-yy" name="card-yy" placeholder="YY" />
+              <input type="text" id="card-mm" name="mm" placeholder="MM"  onChange={(e)=>setMmCard(Number(e.target.value))}/>
+              <input type="text" id="card-yy" name="yy" placeholder="YY" onChange={(e)=>setYyCard(Number(e.target.value))}/>
             </label>
           </div>
           <label htmlFor="card-cvc">
@@ -86,6 +94,7 @@ function App() {
               id="card-cvc"
               name="card-cvc"
               placeholder="e.g. 1234 5678 9123 0000"
+              onChange={e=>setCvcCard(Number(e.target.value))}
             />
           </label>
         </div>
