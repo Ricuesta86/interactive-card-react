@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { NumericFormat } from "react-number-format";
+import { PatternFormat } from "react-number-format";
 import "./App.scss";
 import bgCardFront from "./assets/images/bg-card-front.png";
 import bgCardBack from "./assets/images/bg-card-back.png";
@@ -20,20 +22,16 @@ function App() {
     cvc: 0,
   });
 
-  const [numberCard, setNumberCard] = useState<number>(0)
-  const [nameCard, setNameCard] = useState<String>('')
-  const [yyCard, setYyCard] = useState<number>(0)
-  const [mmCard, setMmCard] = useState<number>(0)
-  const [cvcCard, setCvcCard] = useState<number>(0)
+  const [numberCard, setNumberCard] = useState<number>(0);
+  const [nameCard, setNameCard] = useState<String>("");
+  const [yyCard, setYyCard] = useState<number>(0);
+  const [mmCard, setMmCard] = useState<number>(0);
+  const [cvcCard, setCvcCard] = useState<number>(0);
 
-
-  const handleChange = (event:any,name:string)=>{
+  const handleChange = (event: any, name: string) => {
     event.preventDefault();
     console.log(event.target.name.value);
-  }
-
-
-
+  };
 
   return (
     <div className="main">
@@ -41,7 +39,15 @@ function App() {
         <div className="main__header__cardfront">
           <img src={bgCardFront} alt="Card Front" />
           <p className="main__header__cardfront__number">
-            {numberCard === 0 ? "0000 0000 0000 0000" : numberCard}
+            {
+              <PatternFormat
+                displayType="text"
+                value={numberCard === 0 ? "0000 0000 0000 0000" : numberCard}
+                valueIsNumericString
+                format="#### #### #### ####"
+                mask="_"
+              />
+            }
           </p>
           <p className="main__header__cardfront__name">
             {nameCard === "" ? "Jane Appleseed" : nameCard}
@@ -66,7 +72,7 @@ function App() {
             id="card-name"
             name="card-name"
             placeholder="e.g. Jane Applessed"
-            onChange={e=>setNameCard(e.target.value)}
+            onChange={(e) => setNameCard(e.target.value)}
           />
         </label>
         <label htmlFor="card-number">
@@ -76,15 +82,28 @@ function App() {
             id="card-number"
             name="card-number"
             placeholder="e.g. 1234 5678 9123 0000"
-            onChange={e=>setNumberCard(Number(e.target.value))}
+            onChange={(e) => setNumberCard(Number(e.target.value))}
+            maxLength={16}
           />
         </label>
         <div className="main__form__group">
           <div className="main__form__group">
             <label htmlFor="card-number">
               Exp. Date (mm/yy)
-              <input type="text" id="card-mm" name="mm" placeholder="MM"  onChange={(e)=>setMmCard(Number(e.target.value))}/>
-              <input type="text" id="card-yy" name="yy" placeholder="YY" onChange={(e)=>setYyCard(Number(e.target.value))}/>
+              <input
+                type="text"
+                id="card-mm"
+                name="mm"
+                placeholder="MM"
+                onChange={(e) => setMmCard(Number(e.target.value))}
+              />
+              <input
+                type="text"
+                id="card-yy"
+                name="yy"
+                placeholder="YY"
+                onChange={(e) => setYyCard(Number(e.target.value))}
+              />
             </label>
           </div>
           <label htmlFor="card-cvc">
@@ -93,8 +112,8 @@ function App() {
               type="text"
               id="card-cvc"
               name="card-cvc"
-              placeholder="e.g. 1234 5678 9123 0000"
-              onChange={e=>setCvcCard(Number(e.target.value))}
+              placeholder="e.g. 123"
+              onChange={(e) => setCvcCard(Number(e.target.value))}
             />
           </label>
         </div>
