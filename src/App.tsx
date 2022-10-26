@@ -13,6 +13,14 @@ type cardType = {
   cvc: number;
 };
 
+const normalizeCardNumber = (value: string) => {
+  return value
+    .replace(/\s/g, "")
+    .match(/.{1,4}/g)
+    ?.join(" ")
+    .substring(0, 19);
+};
+
 function App() {
   const [card, setCard] = useState<cardType>({
     number: 0,
@@ -78,11 +86,17 @@ function App() {
         <label htmlFor="card-number">
           Card Number
           <input
-            type="text"
+            type="tel"
             id="card-number"
             name="card-number"
+            inputMode="numeric"
+            autoComplete="cc-number"
             placeholder="e.g. 1234 5678 9123 0000"
-            onChange={(e) => setNumberCard(Number(e.target.value))}
+            onChange={(e) => {
+              const { value } = e.target;
+              setNumberCard(Number(value));
+              // e.target.value = normalizeCardNumber(value)
+            }}
             maxLength={16}
           />
         </label>
