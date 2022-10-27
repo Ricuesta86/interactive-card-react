@@ -1,6 +1,8 @@
+import { ReactEventHandler } from 'react';
 import './Form.scss'
 type Props ={
     handleChange:(name:string,value:string|number)=>void;
+    handleShow:()=>void;
 }
 const normalizeCardNumber = (value: string) => {
     return value
@@ -10,7 +12,10 @@ const normalizeCardNumber = (value: string) => {
       .substring(0, 19);
   };
   
-const Form = ({handleChange}:Props) => {
+const Form = ({handleChange,handleShow}:Props) => {
+    const handleSubmit = (event:ReactEventHandler)=>{
+
+    }
   return (
     <div><form className="form">
     <label htmlFor="card-name">
