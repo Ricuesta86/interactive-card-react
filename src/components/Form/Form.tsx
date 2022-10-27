@@ -13,11 +13,11 @@ const normalizeCardNumber = (value: string) => {
   };
   
 const Form = ({handleChange,handleShow}:Props) => {
-    const handleSubmit = (event:ReactEventHandler)=>{
-
+    const handleSubmit = (event:any)=>{
+        handleShow()
     }
   return (
-    <div><form className="form">
+    <div><form className="form" onSubmit={(event)=>handleSubmit(event)}>
     <label htmlFor="card-name">
       {" "}
       Cardholder name

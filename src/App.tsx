@@ -30,7 +30,7 @@ function App() {
   return (
     <div className="main">
       <Header card={card} />
-      {show ? <Form handleChange={handleChange} handleShow={handleShow}/> : <Thanks />}
+      {show ? <Form handleChange={handleChange} handleShow={handleShow}/> : <Thanks handleShow={handleShow}/>}
         
     </div>
   );
