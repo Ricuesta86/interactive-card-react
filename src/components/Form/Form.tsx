@@ -11,6 +11,12 @@ const normalizeCardNumber = (value: string) => {
       ?.join(" ")
       .substring(0, 19);
   };
+  const normalizeNumber = (value:string) => {
+    return value
+      .replace(/\s/g, "")
+      .replace(/([^0-9])/g, "")
+      .trim();
+  }
   
 const Form = ({handleChange,handleShow}:Props) => {
     const handleSubmit = (event:any)=>{
@@ -56,14 +62,21 @@ const Form = ({handleChange,handleShow}:Props) => {
             id="card-mm"
             name="mm"
             placeholder="MM"
-            onChange={(e) => handleChange('mm',Number(e.target.value))}
+            maxLength={2}
+            onChange={(e) => {                
+                e.target.value=normalizeNumber(e.target.value) as string
+                handleChange('mm',Number(e.target.value))
+        }}
           />
           <input
             type="text"
             id="card-yy"
             name="yy"
             placeholder="YY"
-            onChange={(e) => handleChange('yy',Number(e.target.value))}
+            maxLength={2}
+            onChange={(e) => {
+                e.target.value=normalizeNumber(e.target.value) as string
+                handleChange('yy',Number(e.target.value))}}
           />
         </label>
       </div>
@@ -74,7 +87,10 @@ const Form = ({handleChange,handleShow}:Props) => {
           id="card-cvc"
           name="card-cvc"
           placeholder="e.g. 123"
-          onChange={(e) => handleChange('cvc',Number(e.target.value))}
+          maxLength={3}
+          onChange={(e) => {
+            e.target.value=normalizeNumber(e.target.value) as string
+            handleChange('cvc',Number(e.target.value))}}
         />
       </label>
     </div>
