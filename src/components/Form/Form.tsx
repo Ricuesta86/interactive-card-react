@@ -1,7 +1,8 @@
-import { ReactEventHandler } from 'react';
+import { ReactEventHandler, useState } from 'react';
 import './Form.scss'
+import type { errorType } from '../../type';
 type Props = {
-    handleChange: (name: string, value: string | number) => void;
+    handleChange: (field: string, value: string | number) => void;
     handleShow: () => void;
 }
 const normalizeCardNumber = (value: string) => {
@@ -17,27 +18,49 @@ const normalizeNumber = (value: string) => {
         .replace(/([^0-9])/g, "")
         .trim();
 }
-// const validateEmptyField =(value:string):boolean=>{
-//     if(value.length > 0){
-//         return false;
-//     }
-//     return true;
-// }
 // const validateNumber = (value:string):boolean=>{
 //     if(value.)
 //     return true;
 // }
 
 const Form = ({ handleChange, handleShow }: Props) => {
+    const [error, setError] = useState<errorType>({
+        name:'',
+        number:'',
+        mm:'',
+        yy:'',
+        cvc:'',
+    })
+    const validateEmptyField = (field: string, value: string): boolean => {
+        if (value === '') {        
+            setError(error=>({
+                ...error,
+                [field]:'Can\'t be Blank'
+            }))
+            return false;
+        }
+        setError(error=>({
+            ...error,
+            [field]:''
+        }))
+        return true;
+    }
+
     const handleSubmit = (event: any) => {
         event.preventDefault();
-
+        let name = validateEmptyField('name', event.target['card-name'].value);
+        let number = validateEmptyField('number', event.target['card-number'].value);
+        let mm = validateEmptyField('mm', event.target['card-mm'].value);
+        let yy = validateEmptyField('yy', event.target['card-yy'].value);
+        let cvc = validateEmptyField('cvc', event.target['card-cvc'].value);
         console.log(event.target['card-name'].value);
         console.log(event.target['card-number'].value);
         console.log(event.target['card-mm'].value);
         console.log(event.target['card-yy'].value);
         console.log(event.target['card-cvc'].value);
-        handleShow()
+            if(name){
+                // handleShow()
+            }
     }
     return (
         <div><form className="form" onSubmit={(event) => handleSubmit(event)}>
@@ -51,6 +74,7 @@ const Form = ({ handleChange, handleShow }: Props) => {
                     placeholder="e.g. Jane Applessed"
                     onChange={(e) => handleChange('name', e.target.value)}
                 />
+                <p className='form__error'>{error.name}</p>
             </label>
             <label htmlFor="card-number">
                 Card Number
@@ -69,6 +93,7 @@ const Form = ({ handleChange, handleShow }: Props) => {
                     }}
                     maxLength={19}
                 />
+                <p className='form__error'>{error.number}</p>
             </label>
             <div className="form__group">
                 <div className="form__group">
@@ -85,6 +110,7 @@ const Form = ({ handleChange, handleShow }: Props) => {
                                 handleChange('mm', Number(e.target.value))
                             }}
                         />
+                        <p className='form__error'>{error.mm}</p>
                         <input
                             type="text"
                             id="card-yy"
@@ -96,6 +122,7 @@ const Form = ({ handleChange, handleShow }: Props) => {
                                 handleChange('yy', Number(e.target.value))
                             }}
                         />
+                        <p className='form__error'>{error.yy}</p>
                     </label>
                 </div>
                 <label htmlFor="card-cvc">
@@ -111,6 +138,7 @@ const Form = ({ handleChange, handleShow }: Props) => {
                             handleChange('cvc', Number(e.target.value))
                         }}
                     />
+                    <p className='form__error'>{error.cvc}</p>
                 </label>
             </div>
             <button>Confirm</button>
