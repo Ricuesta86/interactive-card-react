@@ -7,11 +7,11 @@ import type { cardType } from "./type";
 
 function App() {
   const [card, setCard] = useState<cardType>({
-    number: '',
-    name: '',
-    yy: 0,
-    mm: 0,
-    cvc: 0,
+    number: {value:'',error:''},
+    name: {value:'',error:''},
+    yy: {value:0,error:''},
+    mm:{value:0,error:''},
+    cvc: {value:0,error:''},
   });
   const [show, setShow] = useState<boolean>(true)
 
@@ -19,7 +19,7 @@ function App() {
   const handleChange = (name: string, value: string | number) => {
     setCard({
       ...card,
-      [name]: value
+      [name]:{...[name],value}
     })
   }
 

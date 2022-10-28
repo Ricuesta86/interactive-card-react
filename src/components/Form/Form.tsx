@@ -17,12 +17,27 @@ const normalizeNumber = (value: string) => {
         .replace(/([^0-9])/g, "")
         .trim();
 }
+// const validateEmptyField =(value:string):boolean=>{
+//     if(value.length > 0){
+//         return false;
+//     }
+//     return true;
+// }
+// const validateNumber = (value:string):boolean=>{
+//     if(value.)
+//     return true;
+// }
 
 const Form = ({ handleChange, handleShow }: Props) => {
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        console.log(event.target['card-name']);
-        // handleShow()
+
+        console.log(event.target['card-name'].value);
+        console.log(event.target['card-number'].value);
+        console.log(event.target['card-mm'].value);
+        console.log(event.target['card-yy'].value);
+        console.log(event.target['card-cvc'].value);
+        handleShow()
     }
     return (
         <div><form className="form" onSubmit={(event) => handleSubmit(event)}>

@@ -15,19 +15,19 @@ const Header = ({card}:Props) => {
     <div className="header__cardfront">
       <img src={bgCardFront} alt="Card Front" />
       <p className="header__cardfront__number">
-        {card.number === '' ? "0000 0000 0000 0000" : card.number}
+        {card.number.value === '' ? "0000 0000 0000 0000" : card.number.value}
       </p>
       <p className="header__cardfront__name">
-        {card.name === "" ? "Jane Appleseed" : card.name}
+        {card.name.value === "" ? "Jane Appleseed" : card.name.value}
       </p>
       <p className="header__cardfront__yy-mm">
-        {card.yy === 0 ? "00" : card.yy}/{card.mm === 0 ? "00" : card.mm}
+        {card.yy.value === 0 ? "00" : card.yy.value}/{card.mm.value === 0 ? "00" : card.mm.value}
       </p>
     </div>
     <div className="header__cardback">
       <img src={bgCardBack} alt="Card back" />
       <p className="header__cardback__cvc">
-        {card.cvc === 0 ? "000" : card.cvc}
+        {card.cvc.value === 0 ? "000" : card.cvc.value}
       </p>
     </div>
   </header>

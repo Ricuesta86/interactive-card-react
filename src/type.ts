@@ -1,7 +1,17 @@
 export type cardType = {
-    number: string;
-    name: string;
-    yy: number;
-    mm: number;
-    cvc: number;
+    number: typeString;
+    name: typeString;
+    yy: typeNumber;
+    mm: typeNumber;
+    cvc: typeNumber;
   };
+
+  export type typeString = {
+    value:string,
+    error:string
+  }
+
+  export type typeNumber = {
+    value:number,
+    error:string
+  }
