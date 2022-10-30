@@ -8,6 +8,7 @@ type Props = {
     handleChange: (field: string, value: string | number) => void;
     handleShow: () => void;
     card: cardType;
+    handleInicial:()=>void;
 }
 
 
@@ -26,11 +27,6 @@ const normalizeNumber = (value: string) => {
         .replace(/([^0-9])/g, "")
         .trim();
 }
-// const validateNumber = (value:string):boolean=>{
-//     if(value.)
-//     return true;
-// }
-
 class Validator {
 
     value: any;
@@ -89,7 +85,7 @@ class Validator {
 
 
 
-const Form = ({ handleChange, handleShow, card }: Props) => {
+const Form = ({ handleChange, handleShow, card ,handleInicial}: Props) => {
     const [error, setError] = useState({
         name: [''],
         number: [''],
@@ -102,18 +98,17 @@ const Form = ({ handleChange, handleShow, card }: Props) => {
         const { name, number, mm, yy, cvc } = card;
         const errorV = { name: [''], number: [''], mm: [''], yy: [''], cvc: [''] }
 
-        // console.log(validateName(name));
         errorV.name = validateName(name);
         errorV.number = validateNumber(number);
         errorV.mm = validateMM(mm);
         errorV.yy = validateYY(yy);
         errorV.cvc = validateCVC(cvc);
-        // validations.email = this.validateEmail(email)
-        // validations.gender = this.validateGender(gender)
 
-        const validationMesages = Object.values(error).filter(
+        console.log(errorV);
+        const validationMesages = Object.values(errorV).filter(
             (validationMessage) => validationMessage.length > 0
         )
+        console.log(validationMesages.length)
         const isValid = !validationMesages.length
 
         if (!isValid) {
@@ -158,45 +153,18 @@ const Form = ({ handleChange, handleShow, card }: Props) => {
             .isLetter('Wrong format, numbers only.').result
     }
 
-
-
-
-
-    // const validateLetter= (value:string):boolean=>{
-    //     if(error.number !='') return true
-    //     let regExp=/[A-z]/g;
-    //     if(regExp.test(value)){
-    //         setError(error=>({
-    //             ...error,
-    //             number:'Wrong format, numbers only.'
-    //         }))
-    //         return true;
-    //     }
-    //     setError(error=>({
-    //         ...error,
-    //         number:''
-    //     }))
-    //     return false;
-    // }
-
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        // let name=validateEmptyField('name', event.target['card-name'].value);
-        // let number= validateEmptyField('number', event.target['card-number'].value);
-        // // number=validateLetter( event.target['card-number'].value)
-        // let mm= validateEmptyField('mm', event.target['card-mm'].value);
-        // let yy= validateEmptyField('yy', event.target['card-yy'].value);
-        // let cvc=validateEmptyField('cvc', event.target['card-cvc'].value);
-        // if(error.name==''&& error.number==''){
-        //     // handleShow()
-        // }
 
         const isValid = validateAll()
 
         if (!isValid) {
             return false
+        }else{
+            handleInicial()
+            handleShow()
         }
-
+        
 
 
     }

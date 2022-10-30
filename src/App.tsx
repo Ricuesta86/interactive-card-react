@@ -15,6 +15,15 @@ function App() {
   });
   const [show, setShow] = useState<boolean>(true)
 
+  const handleInicial = () => {
+    setCard({
+      number: '',
+      name: '',
+      yy: 0,
+      mm: 0,
+      cvc: 0,
+    })
+  }
 
   const handleChange = (name: string, value: string | number) => {
     setCard({
@@ -30,7 +39,7 @@ function App() {
   return (
     <div className="main">
       <Header card={card} />
-      {show ? <Form handleChange={handleChange} handleShow={handleShow} card={card}/> : <Thanks handleShow={handleShow}/>}
+      {show ? <Form handleChange={handleChange} handleShow={handleShow} handleInicial={handleInicial} card={card}/> : <Thanks handleShow={handleShow}/>}
         
     </div>
   );
