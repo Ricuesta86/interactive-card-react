@@ -1,10 +1,16 @@
-import { ReactEventHandler, useState } from 'react';
+import { useState } from 'react';
 import './Form.scss'
 import type { errorType } from '../../type';
+import { cardType } from '../../type';
+
+
 type Props = {
     handleChange: (field: string, value: string | number) => void;
     handleShow: () => void;
+    card: cardType;
 }
+
+
 const normalizeCardNumber = (value: string) => {
     return value
         .replace(/\s/g, "")
@@ -12,6 +18,8 @@ const normalizeCardNumber = (value: string) => {
         ?.join(" ")
         .substring(0, 19);
 };
+
+
 const normalizeNumber = (value: string) => {
     return value
         .replace(/\s/g, "")
@@ -23,44 +31,174 @@ const normalizeNumber = (value: string) => {
 //     return true;
 // }
 
-const Form = ({ handleChange, handleShow }: Props) => {
-    const [error, setError] = useState<errorType>({
-        name:'',
-        number:'',
-        mm:'',
-        yy:'',
-        cvc:'',
-    })
-    const validateEmptyField = (field: string, value: string): boolean => {
-        if (value === '') {        
-            setError(error=>({
-                ...error,
-                [field]:'Can\'t be Blank'
-            }))
-            return false;
-        }
-        setError(error=>({
-            ...error,
-            [field]:''
-        }))
-        return true;
+class Validator {
+
+    value: any;
+    result: string[];
+
+    constructor(value: any) {
+        this.value = value
+        this.result = []
     }
+
+    isNotEmpty(msg: string) {
+        if (!this.value) {
+            this.result.push(msg)
+        }
+
+        return this
+    }
+
+    isLength(minLength: number, maxLength: number, msg: string) {
+        if (this.value.length < minLength || this.value.length > maxLength) {
+            this.result.push(msg)
+        }
+
+        return this
+    }
+
+    isLetter(msg:string) {
+        let regExp = /[A-z]/g;
+        if (regExp.test(this.value)) { 
+            this.result.push(msg);
+        }
+        return this
+    }
+
+    isMonth(msg:string){
+        if(!(this.value>=1&&this.value<=12)){
+            this.result.push(msg)
+        }
+        return this
+    }
+
+    isYear(msg:string){
+        if(!(this.value>=22&&this.value<=27)){
+            this.result.push(msg)
+        }
+        return this
+    }
+    // isEmail(msg:string) {
+    //   if (!/\S+@\S+\.\S+/.test(this.email)) {
+    //     this.result.push(msg)
+    //   }
+
+    //   return this
+    // }
+}
+
+
+
+const Form = ({ handleChange, handleShow, card }: Props) => {
+    const [error, setError] = useState({
+        name: [''],
+        number: [''],
+        mm: [''],
+        yy: [''],
+        cvc: [''],
+    })
+
+    const validateAll = () => {
+        const { name, number, mm, yy, cvc } = card;
+        const errorV = { name: [''], number: [''], mm: [''], yy: [''], cvc: [''] }
+
+        // console.log(validateName(name));
+        errorV.name = validateName(name);
+        errorV.number = validateNumber(number);
+        errorV.mm = validateMM(mm);
+        errorV.yy = validateYY(yy);
+        errorV.cvc = validateCVC(cvc);
+        // validations.email = this.validateEmail(email)
+        // validations.gender = this.validateGender(gender)
+
+        const validationMesages = Object.values(error).filter(
+            (validationMessage) => validationMessage.length > 0
+        )
+        const isValid = !validationMesages.length
+
+        if (!isValid) {
+            setError({...errorV
+            })
+        }
+
+        return isValid
+    }
+
+    const validateName = (name: string) => {
+        const validatorName = new Validator(name)
+        return validatorName
+            .isNotEmpty('Can\'t be black').result
+    }
+
+    const validateNumber = (number: string) => {
+        const validatorNumber = new Validator(number)
+        return validatorNumber
+            .isNotEmpty('Can\'t be black')
+            .isLetter('Wrong format, numbers only.').result
+    }
+    
+    const validateMM = (mm: number) => {
+        const validatorMM = new Validator(mm)
+        return validatorMM
+            .isNotEmpty('Can\'t be black')
+            .isMonth('Month incorrect').result
+    }
+
+    const validateYY = (yy: number) => {
+        const validatorYY = new Validator(yy)
+        return validatorYY
+            .isNotEmpty('Can\'t be black')
+            .isYear('Year incorrect').result
+    }
+
+    const validateCVC = (cvc: number) => {
+        const validatorCVC = new Validator(cvc)
+        return validatorCVC
+            .isNotEmpty('Can\'t be black')
+            .isLetter('Wrong format, numbers only.').result
+    }
+
+
+
+
+
+    // const validateLetter= (value:string):boolean=>{
+    //     if(error.number !='') return true
+    //     let regExp=/[A-z]/g;
+    //     if(regExp.test(value)){
+    //         setError(error=>({
+    //             ...error,
+    //             number:'Wrong format, numbers only.'
+    //         }))
+    //         return true;
+    //     }
+    //     setError(error=>({
+    //         ...error,
+    //         number:''
+    //     }))
+    //     return false;
+    // }
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        let name = validateEmptyField('name', event.target['card-name'].value);
-        let number = validateEmptyField('number', event.target['card-number'].value);
-        let mm = validateEmptyField('mm', event.target['card-mm'].value);
-        let yy = validateEmptyField('yy', event.target['card-yy'].value);
-        let cvc = validateEmptyField('cvc', event.target['card-cvc'].value);
-        console.log(event.target['card-name'].value);
-        console.log(event.target['card-number'].value);
-        console.log(event.target['card-mm'].value);
-        console.log(event.target['card-yy'].value);
-        console.log(event.target['card-cvc'].value);
-            if(name){
-                // handleShow()
-            }
+        // let name=validateEmptyField('name', event.target['card-name'].value);
+        // let number= validateEmptyField('number', event.target['card-number'].value);
+        // // number=validateLetter( event.target['card-number'].value)
+        // let mm= validateEmptyField('mm', event.target['card-mm'].value);
+        // let yy= validateEmptyField('yy', event.target['card-yy'].value);
+        // let cvc=validateEmptyField('cvc', event.target['card-cvc'].value);
+        // if(error.name==''&& error.number==''){
+        //     // handleShow()
+        // }
+
+        const isValid = validateAll()
+
+        if (!isValid) {
+            return false
+        }
+
+
+
     }
     return (
         <div><form className="form" onSubmit={(event) => handleSubmit(event)}>
@@ -110,7 +248,7 @@ const Form = ({ handleChange, handleShow }: Props) => {
                                 handleChange('mm', Number(e.target.value))
                             }}
                         />
-                        <p className='form__error'>{error.mm}</p>
+                        <p className='form__error'>{error.mm[0]}</p>
                         <input
                             type="text"
                             id="card-yy"
@@ -122,7 +260,7 @@ const Form = ({ handleChange, handleShow }: Props) => {
                                 handleChange('yy', Number(e.target.value))
                             }}
                         />
-                        <p className='form__error'>{error.yy}</p>
+                        <p className='form__error'>{error.yy[0]}</p>
                     </label>
                 </div>
                 <label htmlFor="card-cvc">
