@@ -8,7 +8,7 @@ type Props = {
     handleChange: (field: string, value: string | number) => void;
     handleShow: () => void;
     card: cardType;
-    handleInicial:()=>void;
+    handleInicial: () => void;
 }
 
 
@@ -53,30 +53,30 @@ class Validator {
         return this
     }
     isLengthEqual(length: number, msg: string) {
-        if (this.value.length !== length ) {
+        if (this.value.length !== length) {
             this.result.push(msg)
         }
 
         return this
     }
 
-    isLetter(msg:string) {
+    isLetter(msg: string) {
         let regExp = /[A-z]/g;
-        if (regExp.test(this.value)) { 
+        if (regExp.test(this.value)) {
             this.result.push(msg);
         }
         return this
     }
 
-    isMonth(msg:string){
-        if(!(this.value>=1&&this.value<=12)){
+    isMonth(msg: string) {
+        if (!(this.value >= 1 && this.value <= 12)) {
             this.result.push(msg)
         }
         return this
     }
 
-    isYear(msg:string){
-        if(!(this.value>=22&&this.value<=27)){
+    isYear(msg: string) {
+        if (!(this.value >= 22 && this.value <= 27)) {
             this.result.push(msg)
         }
         return this
@@ -92,7 +92,7 @@ class Validator {
 
 
 
-const Form = ({ handleChange, handleShow, card ,handleInicial}: Props) => {
+const Form = ({ handleChange, handleShow, card, handleInicial }: Props) => {
     const [error, setError] = useState({
         name: [''],
         number: [''],
@@ -119,7 +119,8 @@ const Form = ({ handleChange, handleShow, card ,handleInicial}: Props) => {
         const isValid = !validationMesages.length
 
         if (!isValid) {
-            setError({...errorV
+            setError({
+                ...errorV
             })
         }
 
@@ -136,10 +137,10 @@ const Form = ({ handleChange, handleShow, card ,handleInicial}: Props) => {
         const validatorNumber = new Validator(number)
         return validatorNumber
             .isNotEmpty('Can\'t be black')
-            .isLengthEqual(19,'Card Number incorrect')
+            .isLengthEqual(19, 'Card Number incorrect')
             .isLetter('Wrong format, numbers only.').result
     }
-    
+
     const validateMM = (mm: number) => {
         const validatorMM = new Validator(mm)
         return validatorMM
@@ -168,11 +169,14 @@ const Form = ({ handleChange, handleShow, card ,handleInicial}: Props) => {
 
         if (!isValid) {
             return false
-        }else{
-            handleInicial()
-            handleShow()
+        } else {
+            setTimeout(() => {
+                handleInicial()
+                handleShow()
+            }, 1000);
+
         }
-        
+
 
 
     }
