@@ -52,6 +52,13 @@ class Validator {
 
         return this
     }
+    isLengthEqual(length: number, msg: string) {
+        if (this.value.length !== length ) {
+            this.result.push(msg)
+        }
+
+        return this
+    }
 
     isLetter(msg:string) {
         let regExp = /[A-z]/g;
@@ -129,6 +136,7 @@ const Form = ({ handleChange, handleShow, card ,handleInicial}: Props) => {
         const validatorNumber = new Validator(number)
         return validatorNumber
             .isNotEmpty('Can\'t be black')
+            .isLengthEqual(19,'Card Number incorrect')
             .isLetter('Wrong format, numbers only.').result
     }
     
@@ -199,7 +207,7 @@ const Form = ({ handleChange, handleShow, card ,handleInicial}: Props) => {
                     }}
                     maxLength={19}
                 />
-                <p className='form__error'>{error.number}</p>
+                <p className='form__error'>{error.number[0]}</p>
             </label>
             <div className="form__group">
                 <div className="form__group">
