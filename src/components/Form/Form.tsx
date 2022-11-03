@@ -177,8 +177,6 @@ const Form = ({ handleChange, handleShow, card, handleInicial }: Props) => {
 
         }
 
-
-
     }
     return (
         <div><form className="form" onSubmit={(event) => handleSubmit(event)}>
