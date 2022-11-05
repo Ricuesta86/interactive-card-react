@@ -18,12 +18,15 @@
     margin-bottom: 18px;
     border-radius: 4px;
     font-family: variables.$font;
-    border: 1px solid variables.$DarkGrayishViolet;
+    border: 1px solid rgba($color: variables.$DarkGrayishViolet, $alpha: 0.2);
     padding-left: 10px;
     font-size: 1em;
     outline: none;
     &::placeholder {
       color: variables.$DarkGrayishViolet;
+    }
+    &:focus,&:focus-visible,&:focus-within{
+        border: 1px solid rgba($color: variables.$DarkGrayishViolet, $alpha: 1);
     }
     &--error{
         border: 1px solid variables.$Red;  
