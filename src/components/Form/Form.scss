@@ -25,6 +25,9 @@
     &::placeholder {
       color: variables.$DarkGrayishViolet;
     }
+    &--error{
+        border: 1px solid variables.$Red;  
+    }
   }
   &__grid {
     display: grid;

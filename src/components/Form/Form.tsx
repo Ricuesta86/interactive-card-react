@@ -184,7 +184,7 @@ const Form = ({ handleChange, handleShow, card, handleInicial }: Props) => {
                 {" "}
                 Cardholder name
             </label>
-            <input className='form__input'
+            <input className={error.name[0]?'form__input form__input--error':'form__input'}
                 type="text"
                 id="card-name"
                 name="card-name"
@@ -195,7 +195,7 @@ const Form = ({ handleChange, handleShow, card, handleInicial }: Props) => {
             <label className='form__label' htmlFor="card-number">
                 Card Number
             </label>
-            <input className='form__input'
+            <input className={error.number[0]?'form__input form__input--error':'form__input'}
                 type="text"
                 id="card-number"
                 name="card-number"
@@ -219,7 +219,7 @@ const Form = ({ handleChange, handleShow, card, handleInicial }: Props) => {
                     cvc
                 </label>
                 <div className="form__group">
-                    <input className='form__input'
+                    <input className={error.mm[0]?'form__input form__input--error':'form__input'}
                         type="text"
                         id="card-mm"
                         name="mm"
@@ -230,7 +230,7 @@ const Form = ({ handleChange, handleShow, card, handleInicial }: Props) => {
                             handleChange('mm', Number(e.target.value))
                         }}
                     />
-                    <input className='form__input'
+                    <input className={error.yy[0]?'form__input form__input--error':'form__input'}
                         type="text"
                         id="card-yy"
                         name="yy"
@@ -244,7 +244,7 @@ const Form = ({ handleChange, handleShow, card, handleInicial }: Props) => {
                 </div>
 
 
-                <input className='form__input'
+                <input className={error.cvc[0]?'form__input form__input--error':'form__input'}
                     type="text"
                     id="card-cvc"
                     name="card-cvc"
