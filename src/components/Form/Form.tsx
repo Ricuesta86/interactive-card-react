@@ -180,82 +180,85 @@ const Form = ({ handleChange, handleShow, card, handleInicial }: Props) => {
     }
     return (
         <div><form className="form" onSubmit={(event) => handleSubmit(event)}>
-            <label htmlFor="card-name">
+            <label className='form__label' htmlFor="card-name">
                 {" "}
                 Cardholder name
-                <input
-                    type="text"
-                    id="card-name"
-                    name="card-name"
-                    placeholder="e.g. Jane Applessed"
-                    onChange={(e) => handleChange('name', e.target.value)}
-                />
-                <p className='form__error'>{error.name}</p>
             </label>
-            <label htmlFor="card-number">
+            <input className='form__input'
+                type="text"
+                id="card-name"
+                name="card-name"
+                placeholder="e.g. Jane Applessed"
+                onChange={(e) => handleChange('name', e.target.value)}
+            />
+            <div className='form__error'>{error.name}</div>
+            <label className='form__label' htmlFor="card-number">
                 Card Number
-                <input
-                    type="text"
-                    id="card-number"
-                    name="card-number"
-                    placeholder="e.g. 1234 5678 9123 0000"
-                    // value={card.number}
-                    onChange={(e) => {
-                        const { value } = e.target;
-                        handleChange('number', value)
-                        if (value !== '') {
-                            e.target.value = normalizeCardNumber(value) as string
-                        }
-                    }}
-                    maxLength={19}
-                />
-                <p className='form__error'>{error.number[0]}</p>
             </label>
-            <div className="form__group">
-                <div className="form__group">
-                    <label htmlFor="card-number">
-                        Exp. Date (mm/yy)
-                        <input
-                            type="text"
-                            id="card-mm"
-                            name="mm"
-                            placeholder="MM"
-                            maxLength={2}
-                            onChange={(e) => {
-                                e.target.value = normalizeNumber(e.target.value) as string
-                                handleChange('mm', Number(e.target.value))
-                            }}
-                        />
-                        <p className='form__error'>{error.mm[0]}</p>
-                        <input
-                            type="text"
-                            id="card-yy"
-                            name="yy"
-                            placeholder="YY"
-                            maxLength={2}
-                            onChange={(e) => {
-                                e.target.value = normalizeNumber(e.target.value) as string
-                                handleChange('yy', Number(e.target.value))
-                            }}
-                        />
-                        <p className='form__error'>{error.yy[0]}</p>
-                    </label>
-                </div>
-                <label htmlFor="card-cvc">
+            <input className='form__input'
+                type="text"
+                id="card-number"
+                name="card-number"
+                placeholder="e.g. 1234 5678 9123 0000"
+                // value={card.number}
+                onChange={(e) => {
+                    const { value } = e.target;
+                    handleChange('number', value)
+                    if (value !== '') {
+                        e.target.value = normalizeCardNumber(value) as string
+                    }
+                }}
+                maxLength={19}
+            />
+            <div className='form__error'>{error.number[0]}</div>
+            <div className="form__grid">
+                <label className='form__label' htmlFor="card-number">
+                    Exp. Date (mm/yy)
+                </label>
+                <label className='form__label' htmlFor="card-cvc">
                     cvc
-                    <input
+                </label>
+                <div className="form__group">
+                    <input className='form__input'
                         type="text"
-                        id="card-cvc"
-                        name="card-cvc"
-                        placeholder="e.g. 123"
-                        maxLength={3}
+                        id="card-mm"
+                        name="mm"
+                        placeholder="MM"
+                        maxLength={2}
                         onChange={(e) => {
                             e.target.value = normalizeNumber(e.target.value) as string
-                            handleChange('cvc', Number(e.target.value))
+                            handleChange('mm', Number(e.target.value))
                         }}
                     />
-                    <p className='form__error'>{error.cvc}</p>
-                </label>
+                    <input className='form__input'
+                        type="text"
+                        id="card-yy"
+                        name="yy"
+                        placeholder="YY"
+                        maxLength={2}
+                        onChange={(e) => {
+                            e.target.value = normalizeNumber(e.target.value) as string
+                            handleChange('yy', Number(e.target.value))
+                        }}
+                    />
+                </div>
+
+
+                <input className='form__input'
+                    type="text"
+                    id="card-cvc"
+                    name="card-cvc"
+                    placeholder="e.g. 123"
+                    maxLength={3}
+                    onChange={(e) => {
+                        e.target.value = normalizeNumber(e.target.value) as string
+                        handleChange('cvc', Number(e.target.value))
+                    }}
+                />
+                <p className='form__error'>{error.mm[0]}</p>
+                <p className='form__error'>{error.yy[0]}</p>
+                <p className='form__error'>{error.cvc}</p>
+
             </div>
             <button>Confirm</button>
         </form></div>

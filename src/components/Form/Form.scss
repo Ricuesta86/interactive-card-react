@@ -1,4 +1,39 @@
+@use '../../sass/variables';
 
 .form{
-    background-color: yellow;
+    padding: 90px 24px 45px;
+    &__label{
+        text-transform: uppercase;
+        font-size: 0.65em;
+        letter-spacing: 2px;
+        // border: 1px solid red;
+        display: block;
+        margin-bottom: 8px;
+        color: variables.$VeryDarkViolet;
+        font-weight: bold;
+    }
+    &__input{
+        width: 100%;
+        height: 40px;
+        margin-bottom: 18px;
+        border-radius: 4px;
+        font-family: variables.$font; 
+        border: 1px solid variables.$DarkGrayishViolet;
+        padding-left: 10px;
+        font-size: 1em;
+        outline: none;
+        &::placeholder{
+          color: variables.$DarkGrayishViolet;
+        }
+    }
+    &__grid{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 16px
+    }
+    &__group{
+        display: flex;
+        gap:10px;
+    }
+
 }
