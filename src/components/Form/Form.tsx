@@ -255,9 +255,8 @@ const Form = ({ handleChange, handleShow, card, handleInicial }: Props) => {
                         handleChange('cvc', Number(e.target.value))
                     }}
                 />
-                <p className='form__error'>{error.mm[0]}</p>
-                <p className='form__error'>{error.yy[0]}</p>
-                <p className='form__error'>{error.cvc}</p>
+                <div className='form__error'>{error.mm[0]?error.mm[0]:error.yy[0]?error.yy[0]:''}</div>
+                <div className='form__error'>{error.cvc}</div>
 
             </div>
             <button>Confirm</button>
