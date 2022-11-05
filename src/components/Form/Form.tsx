@@ -259,7 +259,7 @@ const Form = ({ handleChange, handleShow, card, handleInicial }: Props) => {
                 <div className='form__error'>{error.cvc}</div>
 
             </div>
-            <button>Confirm</button>
+            <button className='form__submit'>Confirm</button>
         </form></div>
     )
 }
