@@ -32,15 +32,18 @@ function App() {
     })
   }
 
-  const handleShow = ()=>{
+  const handleShow = () => {
     setShow(!show);
   }
 
   return (
     <div className="main">
-      <Header card={card} />
-      {show ? <Form handleChange={handleChange} handleShow={handleShow} handleInicial={handleInicial} card={card}/> : <Thanks handleShow={handleShow}/>}
-        
+      <div className="main__header">
+        <Header card={card} />
+      </div>
+      <div className="main__form">
+        {show ? <Form handleChange={handleChange} handleShow={handleShow} handleInicial={handleInicial} card={card} /> : <Thanks handleShow={handleShow} />}
+      </div>
     </div>
   );
 }

@@ -4,6 +4,8 @@
     width: 1440px;   
     margin: auto;
     display: flex;
+    justify-content: center;
+    align-items: center;
 
     @media(max-width: 414px){
         display: initial;
