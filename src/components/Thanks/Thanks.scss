@@ -1,0 +1,46 @@
+@use "../../sass/variables";
+@use "../../sass/mixins";
+
+.thanks {
+  width: 560px;
+  margin: auto;
+  &__img {
+    display: block;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+  &__title {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: 4px;
+    color: variables.$VeryDarkViolet;
+    margin-bottom: 24px;
+  }
+  &__text {
+    text-align: center;
+    color: variables.$DarkGrayishViolet;
+    font-size: 1.1em;
+    margin-bottom: 24px;
+  }
+  &__btn {
+    background-color: variables.$VeryDarkViolet;
+    color: variables.$LightGrayishViolet;
+    width: 100%;
+    height: 50px;
+    border-radius: 8px;
+    font-size: 1em;
+    letter-spacing: 1px;
+    font-family: variables.$font;
+    &:hover {
+      cursor: pointer;
+    }
+    width: 90%;
+    display: block;
+    margin: auto;
+  }
+  @media (max-width: 414px) {
+    width: 375px;
+    margin-bottom: 60px;
+  }
+}
