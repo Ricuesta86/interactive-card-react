@@ -1,16 +1,25 @@
-@use './sass/variables';
+@use "./sass/variables";
 
-.main{
-    width: 1440px;   
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.main {
+  width: 1440px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  &__header {
+    width: 720px;
+    border: 1px solid black;
+  }
+  &__form {
+    width: 720px;
+    border: 1px solid black;
+  }
 
-    @media(max-width: 414px){
-        display: initial;
-        &__form{
-            padding: 90px 0 45px;
-        }
+  @media (max-width: 414px) {
+    display: initial;
+    &__form {
+      padding: 90px 0 45px;
     }
+  }
 }
