@@ -9,5 +9,8 @@
 
     @media(max-width: 414px){
         display: initial;
+        &__form{
+            padding: 90px 24px 45px;
+        }
     }
 }
