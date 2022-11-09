@@ -4,7 +4,7 @@
   width: 1440px;
   margin: auto;
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
   border: 1px solid black;
   &__header {
@@ -18,7 +18,15 @@
 
   @media (max-width: 414px) {
     display: initial;
+    &__header {
+      width: auto;
+      border: 1px solid black;
+    }
     &__form {
+      border: 1px solid black;
+    }
+    &__form {
+      width: auto;
       padding: 90px 0 45px;
     }
   }

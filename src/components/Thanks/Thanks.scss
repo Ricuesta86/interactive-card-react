@@ -2,8 +2,8 @@
 @use "../../sass/mixins";
 
 .thanks {
-  width: 560px;
-  margin: auto;
+  width: 380px;
+  margin: auto 112px;
   &__img {
     display: block;
     margin: auto;
@@ -26,7 +26,7 @@
   &__btn {
     background-color: variables.$VeryDarkViolet;
     color: variables.$LightGrayishViolet;
-    width: 100%;
+    width: 380px;
     height: 50px;
     border-radius: 8px;
     font-size: 1em;
@@ -35,12 +35,16 @@
     &:hover {
       cursor: pointer;
     }
-    width: 90%;
     display: block;
     margin: auto;
   }
+  
   @media (max-width: 414px) {
     width: 375px;
+    margin: auto 0;
     margin-bottom: 60px;
+    &__btn {
+      width: 90%;
+    }
   }
 }

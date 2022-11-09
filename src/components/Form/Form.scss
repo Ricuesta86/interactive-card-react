@@ -2,7 +2,7 @@
 
 .form {
   width: 380px;
-  margin: auto;
+  margin: auto 112px;
   &__label {
     text-transform: uppercase;
     font-size: 0.65em;
@@ -47,7 +47,7 @@
   &__submit {
     background-color: variables.$VeryDarkViolet;
     color: variables.$LightGrayishViolet;
-    width: 100%;
+    width: 380px;
     height: 50px;
     border-radius: 8px;
     font-size: 1em;
@@ -56,11 +56,24 @@
     &:hover {
       cursor: pointer;
     }
+    display: block;
+    margin: auto;
   }
 
   &__error {
     color: variables.$Red;
     margin: -10px 0 18px;
     font-size: 0.6em;
+  }
+
+
+  @media (max-width: 414px) {
+    width: 375px;
+    margin: auto auto;
+    margin-bottom: 60px;
+    padding: 20px;
+    &__submit {
+      width: 100%;
+    }
   }
 }
