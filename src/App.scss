@@ -6,28 +6,22 @@
   display: flex;
   // justify-content: center;
   align-items: center;
-  border: 1px solid black;
   &__header {
     width: 720px;
-    border: 1px solid black;
   }
   &__form {
     width: 720px;
-    border: 1px solid black;
   }
 
   @media (max-width: 414px) {
     display: initial;
     &__header {
-      width: auto;
-      border: 1px solid black;
+      width: 375px;
     }
+
     &__form {
-      border: 1px solid black;
-    }
-    &__form {
-      width: auto;
-      padding: 90px 0 45px;
+      width: 375px;
+      padding-top: 90px;
     }
   }
 }
